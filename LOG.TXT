@@ -1,0 +1,9 @@
+PsyMake version 1.12  copyright SN Systems Software Ltd 1993
+Z:\COMMAND.COM /C del main.exe
+D:\Psyq\psyq\ccpsx.EXE -O3 -Xo$80010000 lib\mmgmnew.obj src\maint.c src\fbuff.c src\otables.c -omain.cpe
+D:\Psyq\psyq\cpe2x.EXE /ce main.cpe
+CPE2X Ver1.5
+Copyright (C) 1994,1995 by Sony Computer Entertainment Inc.
+convert from main.cpe to main.EXE for Europe area
+pc0:800173a4  t_addr:80010000  t_size:00009800
+Z:\COMMAND.COM /C del main.cpe

@@ -1,0 +1,8 @@
+@echo off
+MOUNT D /home/maurice/Code/PSX/PSY-Q/DOSBOX-C
+D:
+cd D:\Psyq
+CALL PSPATHS
+cd PROJECTS\GRAPHICS
+CALL PSYMAKE > LOG.TXT
+EXIT
