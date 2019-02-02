@@ -17,4 +17,18 @@
 #ifndef ERROR_H
 #define ERROR_H
 
+// Sets up boolean data type just in case it's not setup.
+#ifndef BOOL_T
+#define BOOL_T
+typedef unsigned char bool;
+#define true 1
+#define false 0
+#endif // BOOL_T
+
+// Sets up nullptr value just in case it's not seetup.
+#ifndef nullptr
+#define nullptr 0
+#endif // nullptr
+
+
 #endif  // ERROR_H
