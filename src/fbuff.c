@@ -55,15 +55,19 @@ bool clearFrameBuffer(FrameBuffer* fb) {
   return true;
 }
 
-bool initGraphics(bool db) {
+// initGraphics
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE initGraphics(bool db) {
   SetDispMask(1); //TODO @maurice : figure display masking details out.
   ResetGraph(0);
-  if(!initDisplayBuffer(&FRAMEBUFFER, db)) {
-    return false;
-  }
-  if(!clearFrameBuffer(&FRAMEBUFFER)) {
-    return false;
-  }
-  return true;
+  return initDisplayBuffer(&FRAMEBUFFER, db) || clearFrameBuffer(&FRAMEBUFFER)
   //TODO @maurice : Finish implementing this.
 }
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void initGraphics(bool db) {
+  SetDispMask(1); //TODO @maurice : figure display masking details out.
+  ResetGraph(0);
+  //TODO @maurice : Finish implementing this.
+}
+#endif // FBUFF_ERROR

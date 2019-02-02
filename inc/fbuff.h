@@ -30,6 +30,8 @@ typedef unsigned char bool;
 #define nullptr 0
 #endif // nullptr
 
+#include "error.h"
+
 #include <sys/types.h>
 #include <libgte.h>
 #include <libgpu.h>
@@ -82,6 +84,12 @@ bool clearFrameBuffer(FrameBuffer* fb);
    Sets up all internal data structures and globals for the graphics
    environment.
 */
-bool initGraphics(bool db);
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE initGraphics(bool db);
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void initGraphics(bool db);
+#endif // FBUFF_ERROR
+
 
 #endif // FBUFF_H

@@ -39,6 +39,9 @@ typedef unsigned char bool;
 
 #ifdef FBUFF_ERROR
 
+#define FBUFF_ERROR_TYPE unsigned long int
+
+#define FBUFF_NO_ERROR 0
 #define DISPLAY_BUFFER_INIT 1
 #define FRAME_BUFFER_CLEAR 2
 
