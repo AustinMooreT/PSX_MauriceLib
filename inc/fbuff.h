@@ -63,7 +63,12 @@ bool initDispBuffer(FrameBuffer* fb, bool db);
    \return true if successfull.
    If fb is double buffered swaps the display buffer with the drawing buffer.
 */
-bool swapBuffer(FrameBuffer* fb);
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE swapBuffer(FrameBuffer* fb);
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void swapBuffer(FrameBuffer* fb);
+#endif // FBUFF_ERROR
 
 /**
    \param fb framebuffer to check.

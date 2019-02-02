@@ -29,18 +29,30 @@ bool initDisplayBuffer(FrameBuffer* fb, bool db) {
   return true;
 }
 
-bool swapBuffer(FrameBuffer* fb) {
+// swapBuffer
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE swapBuffer(FrameBuffer* fb) {
+  ResetGraph(1);
+  GsSwapDispBuff();
+  //TODO @maurice : This may be redundant.
+  GetDispEnv(&(fb->dispEnv));
+  GetDrawEnv(&(fb->drawEnv));
+  return FBUFF_NO_ERROR;
+}
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void swapBuffer(FrameBuffer* fb) {
   ResetGraph(1);
   GsSwapDispBuff();
   //TODO @maurice : This may be redundant.
   GetDispEnv(&(fb->dispEnv));
   GetDrawEnv(&(fb->drawEnv));
 }
+#endif // FBUFF_ERROR
 
-bool isInterlaced(FrameBuffer* fb) {
+bool isInterlaced(Frame3Buffer* fb) {
   return fb->dispEnv.isinter;
 }
-
 
 // clearFrameBuffer
 #ifdef FBUFF_ERROR
