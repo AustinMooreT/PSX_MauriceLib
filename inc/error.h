@@ -30,5 +30,13 @@ typedef unsigned char bool;
 #define nullptr 0
 #endif // nullptr
 
+/**
+   This file contains setup for an error handling system for this low level library.
+   You can enable/disable error handling for specifici modules by #define the
+   module name plus error. For example to enable errors for the fbuff module you will
+   add this to your main program. #define FBUFF_ERROR.
+ */
+
+
 
 #endif  // ERROR_H
