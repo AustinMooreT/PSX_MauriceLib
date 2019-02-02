@@ -77,7 +77,12 @@ bool isInterlaced(FrameBuffer* fb);
    \return if the framebuffer was succesfully cleared.
    Sets all of vram to 0.
 */
-bool clearFrameBuffer(FrameBuffer* fb);
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE clearFrameBuffer(FrameBuffer* fb);
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void clearFrameBuffer(FrameBuffer* fb);
+#endif // FBUFF_ERROR
 
 /**
    \return true if successfull.

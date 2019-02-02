@@ -41,7 +41,10 @@ bool isInterlaced(FrameBuffer* fb) {
   return fb->dispEnv.isinter;
 }
 
-bool clearFrameBuffer(FrameBuffer* fb) {
+
+// clearFrameBuffer
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE clearFrameBuffer(FrameBuffer* fb) {
   RECT fbram; // Rectangular primitive covering all of the framebuffer.
   setRECT(&fbram, 0, 0, FRAMEBUFFER_WIDTH, FRAMEBUFFER_HEIGHT);
   // ClearImage2 works for interlaced buffers, while
@@ -52,8 +55,23 @@ bool clearFrameBuffer(FrameBuffer* fb) {
     ClearImage(&fbram, 0, 0, 0);
   }
   DrawSync(0); // Block execution till the framebuffer is clear.
-  return true;
+  return FBUFF_NO_ERROR;
 }
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void clearFrameBuffer(FrameBuffer* fb) {
+  RECT fbram; // Rectangular primitive covering all of the framebuffer.
+  setRECT(&fbram, 0, 0, FRAMEBUFFER_WIDTH, FRAMEBUFFER_HEIGHT);
+  // ClearImage2 works for interlaced buffers, while
+  // ClearImage works works for non interlaced buffers.
+  if (isInterlaced(fb)) {
+    ClearImage2(&fbram, 0, 0, 0);
+  } else {
+    ClearImage(&fbram, 0, 0, 0);
+  }
+  DrawSync(0); // Block execution till the framebuffer is clear.
+}
+#endif // FBUFF_ERROR
 
 // initGraphics
 #ifdef FBUFF_ERROR
