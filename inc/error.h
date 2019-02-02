@@ -37,6 +37,11 @@ typedef unsigned char bool;
    add this to your main program. #define FBUFF_ERROR.
  */
 
+#ifdef FBUFF_ERROR
 
+#define DISPLAY_BUFFER_INIT 1
+#define FRAME_BUFFER_CLEAR 2
+
+#endif // FBUFF_ERROR
 
 #endif  // ERROR_H
