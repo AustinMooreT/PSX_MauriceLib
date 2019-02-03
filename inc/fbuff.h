@@ -56,7 +56,12 @@ typedef struct FrameBuffer {
    \return true if succesfull.
    Sets up the display buffers for a given framebuffer.
 */
-bool initDispBuffer(FrameBuffer* fb, bool db);
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE initDispBuffer(FrameBuffer* fb, bool db);
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void initDispBuffer(FrameBuffer* fb, bool db);
+#endif // FBUGG_ERROR
 
 /**
    \param fb framebuffer to buffer swap on.

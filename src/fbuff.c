@@ -2,7 +2,9 @@
 
 FrameBuffer FRAMEBUFFER;
 
-bool initDisplayBuffer(FrameBuffer* fb, bool db) {
+// initDisplayBuffer
+#ifdef FBUFF_ERROR
+FBUFF_ERROR_TYPE initDisplayBuffer(FrameBuffer* fb, bool db) {
   unsigned short screenW;
   unsigned short screenH;
   if (*((char*)0xbfc7ff52)=='E') {
@@ -26,8 +28,36 @@ bool initDisplayBuffer(FrameBuffer* fb, bool db) {
   }
   GetDispEnv(&(fb->dispEnv));
   GetDrawEnv(&(fb->drawEnv));
-  return true;
+  return FBUFF_NO_ERROR;
 }
+#endif // FBUFF_ERROR
+#ifndef FBUFF_ERROR
+void initDisplayBuffer(FrameBuffer* fb, bool db) {
+  unsigned short screenW;
+  unsigned short screenH;
+  if (*((char*)0xbfc7ff52)=='E') {
+    // PAL MODE
+    screenW = 320;
+    screenH = 256;
+    SetVideoMode(1);
+  } else {
+    // NTSC MODE
+    screenW = 320;
+    screenH = 240;
+    SetVideoMode(0);
+  }
+  // Set the graphics mode resolutions
+  GsInitGraph(screenW, screenH, GsNONINTER|GsOFSGPU, 1, 0);
+  // Set the top left coordinates of the two buffers in video memory
+  if (db) {
+    GsDefDispBuff(0, 0, 0, screenH);
+  } else {
+    GsDefDispBuff(0, 0, 0, 0);
+  }
+  GetDispEnv(&(fb->dispEnv));
+  GetDrawEnv(&(fb->drawEnv));
+}
+#endif // FBUFF_ERROR
 
 // swapBuffer
 #ifdef FBUFF_ERROR
