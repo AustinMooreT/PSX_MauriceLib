@@ -70,8 +70,15 @@ void initOrderingTables(OrderingTables* ot,
           must be between 1 and 15.
    \return true on succesfull execution.
  */
-bool initTable(OrderingTables* ot,
+#ifdef OTABLE_ERROR
+OTABLE_ERROR_TYPE initTable(OrderingTables* ot,
+                            unsigned char tableId,
+                            unsigned char tableSize);
+#endif // OTABLE_ERROR
+#ifndef OTABLE_ERROR
+void initTable(OrderingTables* ot,
                unsigned char tableId,
                unsigned char tableSize);
+#endif // OTABLE_ERROR
 
-#endif  // OTABLE_H
+#endif // OTABLE_H

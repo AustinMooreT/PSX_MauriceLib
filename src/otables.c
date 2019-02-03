@@ -52,30 +52,45 @@ void initOrderingTables(OrderingTables* ot,
 }
 #endif // OTABLE_ERROR
 
-bool initTable(OrderingTables* ot,
-               unsigned char tableId,
-               unsigned char tableSize) {
-  if (tableId > ot->tableCount) {
-    return false;
-  }
-  if (tableSize < 1 || tableSize > 14) {
-    return false;
+#ifdef OTABLE_ERROR
+OTABLE_ERROR_TYPE initTable(OrderingTables* ot,
+                            unsigned char tableId,
+                            unsigned char tableSize) {
+  if (tableId > ot->tableCount) { // Bounds checking
+    return OTABLE_TABLE_ID_GT_TABLE_COUNT;
+  } 
+  if (tableSize < 1 || tableSize > 14) { // Bounds checking
+    return OTABLE_TABLE_ID_LT_TABLE_COUNT;
   }
   if (ot->headers == nullptr ||
-     ot->tables == nullptr) {
-    return false;
+      ot->tables == nullptr) { // Make sure ot is initialized.
+    return OTABLE_NOT_INIT;
   }
-  if (ot->tables[tableId] != nullptr) {
-    return false;
+  if (ot->tables[tableId] != nullptr) { // Verify table isn't inited.
+    return OTABLE_TABLE_DOUBLE_INIT;
   }
   // NOTE the actual table size is 2^tableSize. (1<<tableSize) for fast exponent
   ot->tables[tableId] = (GsOT_TAG*)malloc3(sizeof(GsOT_TAG) * (1 << tableSize));
   if (ot->tables[tableId] == nullptr) {
-    return false;
+    return OTABLE_TABLE_INIT_MALLOC;
   }
   ot->headers[tableId].length = tableSize;
   ot->headers[tableId].org = ot->tables[tableId];
   //TODO @maurice : figure out the first two params
   GsClearOt(0, 0, ot->headers + tableId);
-  return true;
+  return OTABLE_NO_ERROR;
 }
+#endif // OTABLE_ERROR
+#ifndef OTABLE_ERROR
+void initTable(OrderingTables* ot,
+               unsigned char tableId,
+               unsigned char tableSize) {
+  // NOTE the actual table size is 2^tableSize. (1<<tableSize) for fast exponent
+  ot->tables[tableId] = (GsOT_TAG*)malloc3(sizeof(GsOT_TAG) * (1 << tableSize));
+  ot->headers[tableId].length = tableSize;
+  ot->headers[tableId].org = ot->tables[tableId];
+  //TODO @maurice : figure out the first two params
+  GsClearOt(0, 0, ot->headers + tableId);
+}
+#endif // OTABLE_ERROR
+

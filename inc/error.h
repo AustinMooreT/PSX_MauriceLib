@@ -50,6 +50,11 @@ typedef unsigned char bool;
 #define OTABLE_DOUBLE_INIT 1
 #define OTABLE_INIT_HEADER_MALLOC 2
 #define OTABLE_INIT_TABLE_MALLOC 4
+#define OTABLE_TABLE_ID_GT_TABLE_COUNT 8 // GT is greater than.
+#define OTABLE_TABLE_ID_LT_TABLE_COUNT 16 // LT is less than.
+#define OTABLE_NOT_INIT 32
+#define OTABLE_TABLE_DOUBLE_INIT 64
+#define OTABLE_TABLE_INIT_MALLOC 128
 #endif // OTABLE_ERROR
 
 #endif  // ERROR_H
