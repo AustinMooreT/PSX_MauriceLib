@@ -30,6 +30,8 @@ typedef unsigned char bool;
 #define nullptr 0
 #endif  // nullptr
 
+#include "error.h"
+
 #include <sys/types.h>
 #include <stdlib.h>
 #include <libgte.h>
