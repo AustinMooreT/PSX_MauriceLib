@@ -22,24 +22,35 @@ void nullOrderingTables(OrderingTables* ot) {
   ot->tables = nullptr;
 }
 
-bool initOrderingTables(OrderingTables* ot,
-                        unsigned char tableCount) {
+// initOrderingTables
+#ifdef OTABLE_ERROR
+OTABLE_ERROR_TYPE initOrderingTables(OrderingTables* ot,
+                                     unsigned char tableCount) {
   if (ot->headers != nullptr ||
       ot->tables != nullptr) {  // Verify someone hasn't already called init.
-    return false;
+    return OTABLE_DOUBLE_INIT;
   }
   ot->headers = (GsOT*)malloc3(sizeof(GsOT) * tableCount);
   if (ot->headers == nullptr) {  // Verify malloc was succesfull.
-    return false;
+    return OTABLE_INIT_HEADER_MALLOC;
   }
   ot->tables = (GsOT_TAG**)malloc3(sizeof(GsOT_TAG*) * tableCount);
-  if (ot->tables == nullptr) {
+  if (ot->tables == nullptr) { // Verify malloc was succesfull.
     free3(ot->headers);
-    return false;
+    return OTABLE_INIT_TABLE_MALLOC;
   }
   ot->tableCount = tableCount;
-  return true;
+  return OTABLE_NO_ERROR;
 }
+#endif // OTABLE_ERROR
+#ifndef OTABLE_ERROR
+void initOrderingTables(OrderingTables* ot,
+                        unsigned char tableCount) {
+  ot->headers = (GsOT*)malloc3(sizeof(GsOT) * tableCount);
+  ot->tables = (GsOT_TAG**)malloc3(sizeof(GsOT_TAG*) * tableCount);
+  ot->tableCount = tableCount;
+}
+#endif // OTABLE_ERROR
 
 bool initTable(OrderingTables* ot,
                unsigned char tableId,

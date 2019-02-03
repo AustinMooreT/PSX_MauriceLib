@@ -48,8 +48,8 @@ typedef unsigned char bool;
 #define OTABLE_ERROR_TYPE unsigned int
 #define OTABLE_NO_ERROR 0
 #define OTABLE_DOUBLE_INIT 1
-#define OTABLE_HEADER_MALLOC 2
-#define OTABLE_TABLE_MALLOC 4
+#define OTABLE_INIT_HEADER_MALLOC 2
+#define OTABLE_INIT_TABLE_MALLOC 4
 #endif // OTABLE_ERROR
 
 #endif  // ERROR_H

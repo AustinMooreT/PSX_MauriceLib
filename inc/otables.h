@@ -53,8 +53,14 @@ void nullOrderingTables(OrderingTables* ot);
    \param tableCount the number of ordering tables to create.
    \return true on succesfull execution
 */
-bool initOrderingTables(OrderingTables* ot,
+#ifdef OTABLE_ERROR
+OTABLE_ERROR_TYPE initOrderingTables(OrderingTables* ot,
+                                     unsigned char tableCount);
+#endif // OTABLE_ERROR
+#ifndef OTABLE_ERROR
+void initOrderingTables(OrderingTables* ot,
                         unsigned char tableCount);
+#endif // OTABLE_ERROR
 
 /**
    \param ot the ordering tables to operate on.
