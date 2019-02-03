@@ -38,13 +38,18 @@ typedef unsigned char bool;
  */
 
 #ifdef FBUFF_ERROR
-
-#define FBUFF_ERROR_TYPE unsigned long int
-
+#define FBUFF_ERROR_TYPE unsigned int
 #define FBUFF_NO_ERROR 0
 #define DISPLAY_BUFFER_INIT 1
 #define FRAME_BUFFER_CLEAR 2
-
 #endif // FBUFF_ERROR
+
+#ifdef OTABLE_ERROR
+#define OTABLE_ERROR_TYPE unsigned int
+#define OTABLE_NO_ERROR 0
+#define OTABLE_DOUBLE_INIT 1
+#define OTABLE_HEADER_MALLOC 2
+#define OTABLE_TABLE_MALLOC 4
+#endif // OTABLE_ERROR
 
 #endif  // ERROR_H
