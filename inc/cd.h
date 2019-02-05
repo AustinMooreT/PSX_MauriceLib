@@ -33,10 +33,24 @@ typedef unsigned char bool;
 #define nullptr 0
 #endif // nullptr
 
+/**
+   Initializes the CD reader subsystem should only be ran once.
+*/
 #ifdef CD_ERROR
 CD_ERROR_TYPE initCdReader();
 #ifndef CD_ERROR
 void initCdReader();
+#endif // CD_ERROR
+
+/**
+   Starts the CD reader to read some data.
+   You should stop the reader after you are finished
+*/
+#ifdef CD_ERROR
+CD_ERROR_TYPE startCdReader();
+#endif // CD_ERROR
+#ifndef CD_ERROR
+void startCdReader();
 #endif // CD_ERROR
 
 #endif // CD_H
