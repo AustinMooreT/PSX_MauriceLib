@@ -20,6 +20,19 @@
 #include <libcd.h>
 #include <libds.h>
 
+// Sets up boolean data type just in case it's not setup.
+#ifndef BOOL_T
+#define BOOL_T
+typedef unsigned char bool;
+#define true 1
+#define false 0
+#endif // BOOL_T
+
+// Sets up nullptr value just in case it's not seetup.
+#ifndef nullptr
+#define nullptr 0
+#endif // nullptr
+
 #ifdef CD_ERROR
 CD_ERROR_TYPE initCdReader();
 #ifndef CD_ERROR
