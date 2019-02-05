@@ -20,6 +20,10 @@
 #include <libcd.h>
 #include <libds.h>
 
-
+#ifdef CD_ERROR
+CD_ERROR_TYPE initCdReader();
+#ifndef CD_ERROR
+void initCdReader();
+#endif // CD_ERROR
 
 #endif // CD_H

@@ -37,6 +37,10 @@ typedef unsigned char bool;
    add this to your main program. #define FBUFF_ERROR.
  */
 
+#ifdef CD_ERROR
+#define CD_ERROR_TYPE unsigned int
+#endif // CD_ERROR
+
 #ifdef FBUFF_ERROR
 #define FBUFF_ERROR_TYPE unsigned int
 #define FBUFF_NO_ERROR 0
