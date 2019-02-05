@@ -28,24 +28,36 @@ typedef unsigned char bool;
 int main() {
   OrderingTables ot;
   ResetCallback();  // Sets all callback fps to 0.
-  InitHeap3((void*)0x800F8000, 0x00100000);
-  if (!initGraphics(true)) {  // Initialize the FRAMEBUFFER state.
-    return 1;  // Exit if faileure.
-  }
-
   nullOrderingTables(&ot);
-  if (!initOrderingTables(&ot, 2)) {  // Setup a double buffering environment.
-    return 1;  // Exit early if ordering tables failed to be setup.
-  }
-  if(!initTable(&ot, 0, 1) ||
-     !initTable(&ot, 1, 1)) {  // Add a primitive to each ot.
-    // TODO @maurice : add a cleanup call here to cleanup allocated memory in fb.
-    return 1;  // Exit early if failed to init.
-  }
+  InitHeap3((void*)0x800F8000, 0x00100000);
+
+#ifdef FBUFF_ERROR
+  initGraphics(true);
+#endif // FBUFF_ERORR
+#ifndef FBUFF_ERROR
+  initGraphics(true);
+#endif
+
+#ifdef OTABLE_ERROR
+  initOrderingTables(&ot, 2);
+#endif // OTABLE_ERROR
+#ifndef OTABLE_ERROR
+  initOrderingTables(&ot, 2);
+#endif // OTABLE_ERROR
+
+#ifdef OTABLE_ERROR
+  initTable(&ot, 0, 1);
+  initTable(&ot, 1, 1);
+#endif // OTABLE_ERROR
+#ifndef OTABLE_ERROR
+  initTable(&ot, 0, 1);
+  initTable(&ot, 1, 1);
+#endif // OTABLE_ERROR
+
   FntLoad(960, 256);
   SetDumpFnt(FntOpen(10, 10, 320, 240, 0, 512));
   while (1) {
-    FntPrint("Meme\n");
+    FntPrint("Bean\n");
     FntFlush(-1);
     DrawSync(0);
     VSync(0);

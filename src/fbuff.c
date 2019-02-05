@@ -80,7 +80,7 @@ void swapBuffer(FrameBuffer* fb) {
 }
 #endif // FBUFF_ERROR
 
-bool isInterlaced(Frame3Buffer* fb) {
+bool isInterlaced(FrameBuffer* fb) {
   return fb->dispEnv.isinter;
 }
 
