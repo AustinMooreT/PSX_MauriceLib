@@ -53,4 +53,11 @@ CD_ERROR_TYPE startCdReader();
 void startCdReader();
 #endif // CD_ERROR
 
+#ifdef CD_ERROR
+CD_ERROR_TYPE stopCdReader();
+#endif // CD_ERROR
+#ifndef CD_ERROR
+void stopCdReader();
+#endif // CD_ERROR
+
 #endif // CD_H
