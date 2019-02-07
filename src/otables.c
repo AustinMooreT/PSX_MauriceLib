@@ -58,7 +58,7 @@ OTABLE_ERROR_TYPE initTable(OrderingTables* ot,
                             unsigned char tableSize) {
   if (tableId > ot->tableCount) { // Bounds checking
     return OTABLE_TABLE_ID_GT_TABLE_COUNT;
-  } 
+  }
   if (tableSize < 1 || tableSize > 14) { // Bounds checking
     return OTABLE_TABLE_ID_LT_TABLE_COUNT;
   }

@@ -42,6 +42,8 @@ typedef unsigned char bool;
 #define CD_NO_ERROR 0
 #define CD_READER_RUNNING 1
 #define CD_READER_STOPPED 2
+#define CD_FILE_READ_ERROR 4
+#define CD_FILE_READ_MALLOC 8
 #endif // CD_ERROR
 
 #ifdef FBUFF_ERROR
