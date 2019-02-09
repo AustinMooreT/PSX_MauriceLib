@@ -1,4 +1,4 @@
-#include "../cd.h"
+#include "../inc/cd.h"
 
 #ifdef CD_ERROR
 bool isDsActive;
@@ -8,15 +8,16 @@ bool isDsActive;
 #ifdef CD_ERROR
 CD_ERROR_TYPE CD_readerStatus(CD_READER_STATUS_TYPE* status) {
   unsigned char temp; // TODO @ maurice : figure out what gets stored in here.
-  int results = DsReadSync(&temp);
+  int results;
+  results = DsReadSync(&temp);
   if (results < 0) {
-    status* = ERROR;
+    *status = ERROR;
     return CD_FILE_READ_ERROR;
   } else if (results > 0) {
-    status* = READING;
+    *status = READING;
     return CD_NO_ERROR;
   } else {
-    status* = COMPLETE;
+    *status = COMPLETE;
     return CD_NO_ERROR;
   }
 }
@@ -26,11 +27,11 @@ void CD_readerStatus(CD_READER_STATUS_TYPE* status) {
   unsigned char temp; // TODO @ maurice : figure out what gets stored in here.
   int results = DsReadSync(&temp);
   if (results < 0) {
-    status* = ERROR;
+    *status = ERROR;
   } else if (results > 0) {
-    status* = READING;
+    *status = READING;
   } else {
-    status* = COMPLETE;
+    *status = COMPLETE;
   }
 }
 #endif // CD_ERROR
@@ -102,24 +103,5 @@ void CD_readFile(void* fileData, char* fileName) {
   // TODO @ maurice : get rid of magic numbers
   sizeSectors = (fileInfo.size + 2047) / 2048;
   fileData = malloc3(sizeSectors * 2048);
-}
-#endif // CD_ERROR
-
-#ifdef CD_ERROR
-CD_ERROR_TYPE stopCdReader() {
-  int status;
-  if (!isDsActive) {
-    return CD_READER_STOPPED;
-  }
-  CD_readerStatus(status&);
-  if (staus == READING) {
-    return CD_READER_RUNNING;
-  }
-  DsClose();
-}
-#endif // CD_ERROR
-#ifndef CD_ERROR
-CD_ERROR_TYPE stopCdReader() {
-  DsClose();
 }
 #endif // CD_ERROR

@@ -38,13 +38,35 @@ typedef unsigned char bool;
 #define READING 1
 #define ERROR 2
 
-/**
-   Initializes the CD reader subsystem should only be ran once.
-*/
+// CD_readerStatus
 #ifdef CD_ERROR
-CD_ERROR_TYPE startCdReader();
-CD_ERROR_TYPE stopCdReader();
-CD_ERROR_TYPE readFile(void* fileData, char* fileName);
-#endif // CD_H
+CD_ERROR_TYPE CD_readerStatus(CD_READER_STATUS_TYPE* status);
+#endif // CD_ERROR
+#ifndef CD_ERROR
+void CD_readerStatus(CD_READER_STATUS_TYPE* status);
+#endif // CD_ERROR
 
-void initCdReader();
+// CD_initReader
+#ifdef CD_ERROR
+CD_ERROR_TYPE CD_initReader();
+#endif // CD_ERROR
+#ifndef CD_ERROR
+void CD_initReader();
+#endif // CD_ERROR
+
+// CD_stopReader
+#ifdef CD_ERROR
+CD_ERROR_TYPE CD_stopReader();
+#endif // CD_ERROR
+#ifndef CD_ERROR
+void CD_stopReader();
+#endif // CD_ERROR
+
+#ifdef CD_ERROR
+CD_ERROR_TYPE CD_readFile(void* fileData, char* fileName);
+#endif // CD_ERROR
+#ifndef CD_ERROR
+void CD_readFile(void* fileData, char* fileName);
+#endif // CD_ERROR
+
+#endif // CD_H
