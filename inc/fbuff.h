@@ -25,7 +25,7 @@ typedef unsigned char bool;
 #define false 0
 #endif // BOOL_T
 
-// Sets up nullptr value just in case it's not seetup.
+// Sets up nullptr value just in case it's not setup.
 #ifndef nullptr
 #define nullptr 0
 #endif // nullptr
@@ -53,7 +53,7 @@ typedef struct FrameBuffer {
 /**
    \param fb framebuffer to setup display buffer in.
    \param db if true then the framebuffer is double buffered.
-   \return true if succesfull.
+   \return true if successfull.
    Sets up the display buffers for a given framebuffer.
 */
 #ifdef FBUFF_ERROR
