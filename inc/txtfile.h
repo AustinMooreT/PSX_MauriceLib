@@ -14,12 +14,8 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#ifndef CD_H
-#define CD_H
-
-#include <stdlib.h>
-#include <libcd.h>
-#include <libds.h>
+#ifndef TXTFILE_H
+#define TXTFILE_H
 
 // Sets up boolean data type just in case it's not setup.
 #ifndef BOOL_T
@@ -34,40 +30,21 @@ typedef unsigned char bool;
 #define nullptr 0
 #endif // nullptr
 
-#define CD_READER_STATUS_TYPE short
-#define COMPLETE 0
-#define READING 1
-#define ERROR 2
+#include "error.h"
+#include <stdlib.h>
 
-// CD_readerStatus
-#ifdef CD_ERROR
-CD_ERROR_TYPE CD_readerStatus(CD_READER_STATUS_TYPE* status);
-#endif // CD_ERROR
-#ifndef CD_ERROR
-void CD_readerStatus(CD_READER_STATUS_TYPE* status);
-#endif // CD_ERROR
+typedef struct TxtFile {
+  char* fileData;
+  char* start;
+} TxtFile;
 
-// CD_initReader
-#ifdef CD_ERROR
-CD_ERROR_TYPE CD_initReader();
-#endif // CD_ERROR
-#ifndef CD_ERROR
-void CD_initReader();
-#endif // CD_ERROR
+#ifdef TXT_ERROR
+TXT_ERROR_TYPE TXT_createTxtFile(void* fileData, TxtFile* fileStruct);
+#endif // TXT_ERROR
+#ifndef TXT_ERROR
+void TXT_createTxtFile(void* fileData, TxtFile* fileStruct);
+#endif // TXT_ERROR
 
-// CD_stopReader
-#ifdef CD_ERROR
-CD_ERROR_TYPE CD_stopReader();
-#endif // CD_ERROR
-#ifndef CD_ERROR
-void CD_stopReader();
-#endif // CD_ERROR
+// TODO @ maurice : There's lots of useful functions you could add.
 
-#ifdef CD_ERROR
-CD_ERROR_TYPE CD_readFile(void* fileData, char* fileName);
-#endif // CD_ERROR
-#ifndef CD_ERROR
-void CD_readFile(void* fileData, char* fileName);
-#endif // CD_ERROR
-
-#endif // CD_H
+#endif // TXTFILE_H

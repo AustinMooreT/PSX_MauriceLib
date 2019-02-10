@@ -66,4 +66,10 @@ typedef unsigned char bool;
 #define OTABLE_TABLE_INIT_MALLOC 128
 #endif // OTABLE_ERROR
 
+#ifdef TXT_ERROR
+#define TXT_ERROR_TYPE unsigned int
+#define TXT_NO_ERROR 0
+#define TXT_FILE_MALLOC 1
+#endif // TXT_ERROR
+
 #endif  // ERROR_H
